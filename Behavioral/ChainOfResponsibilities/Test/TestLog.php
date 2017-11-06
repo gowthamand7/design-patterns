@@ -48,6 +48,7 @@ class TestLog
 echo 'ERROR, FUNCTIONAL_MESSAGE, FUNCTIONAL_ERROR -> EmailLogger' . PHP_EOL;
 echo 'WARNING, DEBUG -> DBLogger' . PHP_EOL;
 echo 'INFO, NONE -> FileLogger' . PHP_EOL;
+echo 'All other type of errors will go to HiddenLogger -> HiddenLogger' . PHP_EOL;
 
 
 $app = new TestLog();
