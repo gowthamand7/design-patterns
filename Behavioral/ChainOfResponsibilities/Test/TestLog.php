@@ -8,6 +8,7 @@ use DesignPatterns\Behavioral\ChainOfResponsibilities\
     Responsible\EmailLogger,
     Responsible\DBLogger,
     Responsible\FileLogger,
+    Responsible\HiddenLogger,
     LogLevel
 };
 
@@ -26,10 +27,15 @@ class TestLog
         $dbLogger = $emailLogger->setNext(
                 new DBLogger([LogLevel::DEBUG, LogLevel::WARNING])
         );
-        $dbLogger->setNext(
+        
+        $fileLogger = $dbLogger->setNext(
                 new FileLogger([LogLevel::INFO, LogLevel::NONE])
         );
 
+        $fileLogger->setNext(
+                new HiddenLogger()
+                ); // to handle wrong error levels passed from
+        
         $this->logChain = $logger;
     }
 

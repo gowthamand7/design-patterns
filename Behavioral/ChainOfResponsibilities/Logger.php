@@ -6,8 +6,9 @@ abstract class Logger
 {
     protected $log_levels;
     private $nextLogger = null;
+    private $hiddenLogger = null;
 
-    function __construct(array $levels)
+    function __construct($levels = [])
     {
         $this->log_levels = [];
         foreach ($levels as $level)
@@ -25,7 +26,7 @@ abstract class Logger
     public function log(int $level, string $message)
     {
         $processed = false;
-        if (in_array($level, $this->log_levels))
+        if (in_array($level, $this->log_levels) || $this instanceof Responsible\HiddenLogger)
         {
             return $this->write($message);
         }
@@ -40,6 +41,11 @@ abstract class Logger
             throw new \Exception('Undefined Error level');
         }
         return $processed;
+    }
+
+    public function setHiiddenLogger($obj)
+    {
+        $this->hiddenLogger = $obj;
     }
 
     protected abstract function write(string $message);
