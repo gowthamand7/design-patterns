@@ -2,11 +2,14 @@
 
 namespace DesignPatterns\Behavioral\ChainOfResponsibilities\Test;
 
-use DesignPatterns\Behavioral\ChainOfResponsibilities\Responsible\ConsoleLogger;
-use DesignPatterns\Behavioral\ChainOfResponsibilities\Responsible\EmailLogger;
-use DesignPatterns\Behavioral\ChainOfResponsibilities\Responsible\DBLogger;
-use DesignPatterns\Behavioral\ChainOfResponsibilities\Responsible\FileLogger;
-use DesignPatterns\Behavioral\ChainOfResponsibilities\LogLevel;
+use DesignPatterns\Behavioral\ChainOfResponsibilities\
+{
+    Responsible\ConsoleLogger,
+    Responsible\EmailLogger,
+    Responsible\DBLogger,
+    Responsible\FileLogger,
+    LogLevel
+};
 
 require_once '../../../autoload.php';
 
