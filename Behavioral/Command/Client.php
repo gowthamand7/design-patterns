@@ -1,6 +1,8 @@
 <?php
 namespace DesignPatterns\Behavioral\Command;
 
+use DesignPatterns\Behavioral\Command\Commands\{Close, GetDate, GetMonth, GetRand, GetDir};
+
 class Client
 {
 
@@ -25,7 +27,7 @@ class Client
 
     function getAvaliableCommands()
     {
-        return [new GetDate(), new GetMonth(), new Close(), new GetRand()];
+        return [new GetDate(), new GetMonth(), new Close(), new GetRand(), new GetDir];
     }
 
     function printUsage(array $avaliableCommands)

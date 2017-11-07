@@ -1,19 +1,13 @@
 <?php
 
-class GetRand implements Command
+namespace DesignPatterns\Behavioral\Command\Commands;
+
+use DesignPatterns\Behavioral\Command\Command;
+
+class GetRand extends Command
 {
-    private $_description = 'To get the Random number';
-    private $_commandName = 'getRand';
-
-    function getDescription()
-    {
-        return $this->_description;
-    }
-
-    function getCommandName()
-    {
-        return $this->_commandName;
-    }
+    protected $_description = 'To get the Random number';
+    protected $_commandName = 'getRand';
 
     function Execute()
     {

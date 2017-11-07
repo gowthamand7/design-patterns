@@ -1,5 +1,7 @@
 <?php
 
+namespace DesignPatterns\Behavioral\Command;
+
 class CommandParser
 {
     private $_avaliableCommands;

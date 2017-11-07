@@ -2,12 +2,18 @@
 
 namespace DesignPatterns\Behavioral\Command;
 
-interface Command
+abstract class Command
 {
 
-    function Execute();
+    abstract function Execute();
 
-    function getDescription();
+    function getDescription()
+    {
+        return $this->_description;
+    }
 
-    function getCommandName();
+    function getCommandName()
+    {
+        return $this->_commandName;
+    }
 }

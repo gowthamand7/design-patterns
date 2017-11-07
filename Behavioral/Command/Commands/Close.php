@@ -1,19 +1,13 @@
 <?php
 
-class Close implements Command
+namespace DesignPatterns\Behavioral\Command\Commands;
+
+use DesignPatterns\Behavioral\Command\Command;
+
+class Close extends Command
 {
-    private $_description = 'Exit from the app';
-    private $_commandName = 'close';
-
-    function getDescription()
-    {
-        return $this->_description;
-    }
-
-    function getCommandName()
-    {
-        return $this->_commandName;
-    }
+    protected $_description = 'Exit from the app';
+    protected $_commandName = 'close';
 
     function Execute()
     {
