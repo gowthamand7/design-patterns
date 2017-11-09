@@ -21,6 +21,7 @@ class Client
             $obj_cmd->Execute($cmd);
         } else
         {
+            echo "~~~~~~~~~~~~~~~~~~~~~~Invalid command~~~~~~~~~~~~~~~~~".PHP_EOL;
             $this->printUsage($avaliableCommands);
         }
     }
@@ -36,7 +37,7 @@ class Client
         echo 'List of Commands : ' . PHP_EOL;
         foreach ($avaliableCommands as $commands)
         {
-            echo "\t " . $commands->getCommandName() . ' :: ' . $commands->getDescription() . PHP_EOL;
+            echo "\t \t" . $commands->getCommandName() . ' :: ' . $commands->getDescription() . PHP_EOL;
         }
     }
 

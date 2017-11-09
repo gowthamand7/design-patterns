@@ -7,7 +7,7 @@ use DesignPatterns\Behavioral\Command\Command;
 class Close extends Command
 {
     protected $_description = 'Exit from the app';
-    protected $_commandName = 'close';
+    protected $_commandName = 'Close';
 
     function Execute()
     {

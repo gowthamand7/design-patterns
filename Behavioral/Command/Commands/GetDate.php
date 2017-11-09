@@ -7,7 +7,7 @@ use DesignPatterns\Behavioral\Command\Command;
 class GetDate extends Command
 {
     protected $_description = 'Get the current date';
-    protected $_commandName = 'getDate';
+    protected $_commandName = 'GetDate';
 
     function Execute()
     {

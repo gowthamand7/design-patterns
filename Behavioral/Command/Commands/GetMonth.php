@@ -6,7 +6,7 @@ use DesignPatterns\Behavioral\Command\Command;
 class GetMonth extends Command
 {
     protected $_description = 'Get the current month';
-    protected $_commandName = 'getMonth';
+    protected $_commandName = 'GetMonth';
 
     function Execute()
     {
