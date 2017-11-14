@@ -26,3 +26,11 @@ function autoLoad($class)
     $class = implode('/', $class);
     include $class . '.php';
 }
+
+function println(...$string): void
+{
+    foreach ($string as $s)
+    {
+        echo $s . PHP_EOL;
+    }
+}
