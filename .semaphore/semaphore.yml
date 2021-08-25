@@ -1,20 +1,37 @@
 version: v1.0
-name: Initial Pipeline
+name: Semaphore PHP Example Pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+global_job_config:
+  prologue:
+    commands:
+      - sem-version php 7.3
 blocks:
   - name: Install Dependencies
     task:
+      env_vars:
+        - name: APP_ENV
+          value: prod
       jobs:
         - name: composer
           commands:
             - checkout
             - cache restore
-            - 'composer install '
+            - composer install
+            - npm install
+            - cache store
+            - cp .env.example .env
+            - 'php artisan key:generate'
   - name: Run Code Analysis
     task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - composer install
+          - npm install
       jobs:
         - name: phpmd
           commands:
@@ -26,3 +43,36 @@ blocks:
           commands:
             - 'curl -L https://phar.phpunit.de/phpcpd.phar -o phpcpd.phar'
             - php phpcpd.phar app/ --min-lines=50
+  - name: Run Unit tests
+    task:
+      jobs:
+        - name: phpunit
+          commands:
+            - checkout
+            - cache restore
+            - composer install
+            - npm install
+            - ./vendor/bin/phpunit
+  - name: Run Browser tests
+    task:
+      jobs:
+        - name: laravel dusk
+          commands:
+            - checkout
+            - cp .env.example .env
+            - touch database/database.sqlite
+            - cache restore
+            - composer install
+            - npm install
+            - 'php artisan key:generate'
+            - 'php artisan dusk:update --detect'
+            - php artisan serve --env=dusk.local --port=8010 &
+            - php artisan dusk
+  - name: Run Security Tests
+    task:
+      jobs:
+        - name: security-checker
+          commands:
+            - checkout
+            - 'docker pull symfonycorp/cli:latest'
+            - 'docker run --rm -v $(pwd):$(pwd) -w $(pwd) symfonycorp/cli check:security'
